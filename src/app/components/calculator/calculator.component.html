@@ -1,0 +1,24 @@
+<form (ngSubmit)="onCalculate()">
+  <mat-form-field appearance="fill">
+    <mat-label>Temperature</mat-label>
+    <input matInput type="number" name="temp" [(ngModel)]="temp" placeholder="Ex. 42" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Temperature unit</mat-label>
+    <mat-select id="temp-unit" [(value)]="tempUnit">
+      <mat-option value="celsius">&#176;C</mat-option>
+      <mat-option value="fahr">&#176;F</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Relative Humidity</mat-label>
+    <input type="number" name="humidity" [(ngModel)]="humidity" placeholder="Ex. 64" min="0" max="100" matInput required>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit">Calculate</button>
+</form>
+
+<ng-template [ngIf]="heatIndex > 0"><div>Heat index: {{heatIndex}}</div></ng-template>
+<!-- todo: heat index item namiesto tohoto divu -->

@@ -1,0 +1,40 @@
+<mat-table [dataSource]="forecastData" class="mat-elevation-z8">
+  <!-- Rain Column -->
+  <ng-container matColumnDef="rain">
+    <mat-header-cell *matHeaderCellDef> Rain [mm] </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.rain}} </mat-cell>
+  </ng-container>
+
+  <!-- Humidity Column -->
+  <ng-container matColumnDef="humidity">
+    <mat-header-cell *matHeaderCellDef> Humidity [%] </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.humidity}} </mat-cell>
+  </ng-container>
+
+  <!-- Pressure Column -->
+  <ng-container matColumnDef="pressure">
+    <mat-header-cell *matHeaderCellDef> Pressure [hPa] </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.pressure}} </mat-cell>
+  </ng-container>
+
+  <!-- Temperature Column -->
+  <ng-container matColumnDef="temp">
+    <mat-header-cell *matHeaderCellDef> Temperature [&#176;C] </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.temp}} </mat-cell>
+  </ng-container>
+
+  <!-- Time Column -->
+  <ng-container matColumnDef="time">
+    <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.time}} </mat-cell>
+  </ng-container>
+
+  <!-- WeatherCode Column -->
+  <ng-container matColumnDef="weathercode">
+    <mat-header-cell *matHeaderCellDef> WeatherCode [WMO] </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.weathercode}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
