@@ -22,7 +22,7 @@ export class TableTabComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchForecastService.getForecastData().subscribe((data) => {
-      let pom = data.hourly;//todo catch atď.
+      let pom = data.hourly;
 
       // change format of date strings
       pom.time = pom.time.map((x:string) => formatDate(x, 'd.L.YYYY H:mm', 'en-US'));

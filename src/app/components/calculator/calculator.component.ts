@@ -10,6 +10,7 @@ export class CalculatorComponent implements OnInit {
   tempUnit: string = "celsius";
   humidity!: number;
   heatIndex: number = -1;
+  errorMsg: string = '';
 
   constructor() { }
 
@@ -36,7 +37,17 @@ export class CalculatorComponent implements OnInit {
   }
 
   validate(): boolean {
-    //todo validate inputs
+    if (this.humidity < 0 || this.humidity > 100) {
+      this.errorMsg = 'The range for humidity is from 0 to 100%.';
+      return false;
+    }
+
+    if ((this.tempUnit === 'celsius' && this.temp < 26.7) || (this.tempUnit === 'fahr' && this.temp < 80)) {
+      this.errorMsg = 'Heat Index cannot be calculated for temperatures less than 26.7\u00B0C or 80\u00B0F.';
+      return false;
+    }
+
+    this.errorMsg = '';
     return true;
   }
 }

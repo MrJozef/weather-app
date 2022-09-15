@@ -6,7 +6,6 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class FetchForecastService {
-  //todo tieto url
   private apiForTable: string = "https://api.open-meteo.com/v1/forecast?latitude=51.5002&longitude=-0.1262&hourly=temperature_2m,relativehumidity_2m,rain,weathercode,surface_pressure&past_days=7";
   private apiForChart: string = "https://api.open-meteo.com/v1/forecast?latitude=51.5002&longitude=-0.1262&hourly=temperature_2m&past_days=7";
 

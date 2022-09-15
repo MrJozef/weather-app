@@ -1,24 +1,36 @@
-<form (ngSubmit)="onCalculate()">
-  <mat-form-field appearance="fill">
-    <mat-label>Temperature</mat-label>
-    <input matInput type="number" name="temp" [(ngModel)]="temp" placeholder="Ex. 42" required>
-  </mat-form-field>
+<div class="container">
+  <div class="wrapper">
+    <h1>Heat Index Calculator</h1>
+    <p>To calculate Heat Index, please enter Temperature and Relative Humidity. Please note that Heat Index
+      cannot be calculated for temperatures less than 26.7&#176;C or 80&#176;F.</p>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Temperature unit</mat-label>
-    <mat-select id="temp-unit" [(value)]="tempUnit">
-      <mat-option value="celsius">&#176;C</mat-option>
-      <mat-option value="fahr">&#176;F</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <form (ngSubmit)="onCalculate()">
+      <div class="grid">
+        <mat-form-field appearance="fill">
+          <mat-label>Temperature</mat-label>
+          <input matInput type="number" name="temp" [(ngModel)]="temp" placeholder="Ex. 42" required>
+        </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Relative Humidity</mat-label>
-    <input type="number" name="humidity" [(ngModel)]="humidity" placeholder="Ex. 64" min="0" max="100" matInput required>
-  </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Temperature unit</mat-label>
+          <mat-select id="temp-unit" [(value)]="tempUnit">
+            <mat-option value="celsius">&#176;C</mat-option>
+            <mat-option value="fahr">&#176;F</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-  <button mat-flat-button color="primary" type="submit">Calculate</button>
-</form>
+        <mat-form-field appearance="fill">
+          <mat-label>Relative Humidity</mat-label>
+          <input type="number" name="humidity" [(ngModel)]="humidity" placeholder="Ex. 64" matInput required>
+        </mat-form-field>
+      </div>
 
-<ng-template [ngIf]="heatIndex > 0"><div>Heat index: {{heatIndex}}</div></ng-template>
-<!-- todo: heat index item namiesto tohoto divu -->
+      <div class="container">
+        <button mat-flat-button color="primary" type="submit">Calculate</button>
+      </div>
+    </form>
+
+    <div *ngIf="errorMsg !==''"><p class="error">{{errorMsg}}</p></div>
+    <ng-template [ngIf]="heatIndex > 0"><div><p class="mat-display-1 important">Heat index: {{heatIndex}}</p></div></ng-template>
+  </div>
+</div>
