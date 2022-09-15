@@ -16,6 +16,8 @@ import {MatInputModule} from "@angular/material/input";
 import { TableTabComponent } from './components/table-tab/table-tab.component';
 import { ChartTabComponent } from './components/chart-tab/chart-tab.component';
 import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
 
 const appRoutes: Routes = [
   {path: '', component: TableTabComponent},
@@ -42,7 +44,9 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatInputModule,
     RouterModule.forRoot(appRoutes),
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

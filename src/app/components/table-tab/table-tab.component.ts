@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { FetchForecastService } from "../../services/fetch-forecast.service";
 import {formatDate} from "@angular/common";
-
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-table-tab',
@@ -10,7 +12,10 @@ import {formatDate} from "@angular/common";
 })
 export class TableTabComponent implements OnInit {
   displayedColumns: string[] = ["time", "temp", "humidity", "rain", "pressure", "weathercode"];
-  forecastData: any = null;
+  forecastData!: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private fetchForecastService: FetchForecastService) {
   }
@@ -25,14 +30,21 @@ export class TableTabComponent implements OnInit {
       // https://stackoverflow.com/questions/61791902/convert-column-arrays-to-array-of-row-objects
       pom = [pom.rain, pom.relativehumidity_2m, pom.surface_pressure, pom.temperature_2m, pom.time, pom.weathercode];
       pom = this.transpose(pom);
-      this.forecastData = pom.map((x:any) => {return {"rain": x[0], "humidity": x[1], "pressure": x[2], "temp": x[3],
+      pom = pom.map((x:any) => {return {"rain": x[0], "humidity": x[1], "pressure": x[2], "temp": x[3],
         "time": x[4], "weathercode": x[5]} });
-      console.log(this.forecastData);
+
+      this.forecastData = new MatTableDataSource<any>(pom);
+      this.forecastData.sort = this.sort;
+      this.forecastData.paginator = this.paginator;
     });
   }
 
   // https://stackoverflow.com/questions/17428587/transposing-a-2d-array-in-javascript
   transpose(matrix: any) {
     return matrix[0].map((col:any, i:any) => matrix.map((row:any) => row[i]));
+  }
+
+  applyFilter(value: string) {
+    this.forecastData.filter = value.trim().toLowerCase();
   }
 }

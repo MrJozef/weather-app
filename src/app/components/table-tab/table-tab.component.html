@@ -1,25 +1,31 @@
-<mat-table [dataSource]="forecastData" class="mat-elevation-z8">
+<mat-form-field appearance="fill">
+  <mat-label>Find</mat-label>
+  <input (input)="applyFilter($any($event.target).value)" matInput placeholder="Ex. 12.9.2022">
+</mat-form-field>
+
+<mat-table [dataSource]="forecastData" matSort class="mat-elevation-z8">
+
   <!-- Rain Column -->
   <ng-container matColumnDef="rain">
-    <mat-header-cell *matHeaderCellDef> Rain [mm] </mat-header-cell>
+    <mat-header-cell mat-sort-header *matHeaderCellDef> Rain [mm] </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.rain}} </mat-cell>
   </ng-container>
 
   <!-- Humidity Column -->
   <ng-container matColumnDef="humidity">
-    <mat-header-cell *matHeaderCellDef> Humidity [%] </mat-header-cell>
+    <mat-header-cell mat-sort-header *matHeaderCellDef> Humidity [%] </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.humidity}} </mat-cell>
   </ng-container>
 
   <!-- Pressure Column -->
   <ng-container matColumnDef="pressure">
-    <mat-header-cell *matHeaderCellDef> Pressure [hPa] </mat-header-cell>
+    <mat-header-cell mat-sort-header *matHeaderCellDef> Pressure [hPa] </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.pressure}} </mat-cell>
   </ng-container>
 
   <!-- Temperature Column -->
   <ng-container matColumnDef="temp">
-    <mat-header-cell *matHeaderCellDef> Temperature [&#176;C] </mat-header-cell>
+    <mat-header-cell mat-sort-header *matHeaderCellDef> Temperature [&#176;C] </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.temp}} </mat-cell>
   </ng-container>
 
@@ -31,10 +37,11 @@
 
   <!-- WeatherCode Column -->
   <ng-container matColumnDef="weathercode">
-    <mat-header-cell *matHeaderCellDef> WeatherCode [WMO] </mat-header-cell>
+    <mat-header-cell mat-sort-header *matHeaderCellDef> WeatherCode [WMO] </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.weathercode}} </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
+<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
